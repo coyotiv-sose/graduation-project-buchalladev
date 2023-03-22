@@ -12,27 +12,49 @@
 // i need to create an admin who can modify users and offers
 // offers need to display which discounts they have
 
-const user = {
-  name: 'John Doe',
-  email: 'testøasd.de',
-  company: 'company',
-  offers: [offers],
-  memberSince: '01.01.2020',
-  userRole: 'admin', // admin, user
+class user {
+  constructor(name, email, company, offers, memberSince, userRole) {
+    this.name = name
+    this.email = email
+    this.company = company // company that the user is from
+    this.offers = offers // offers that the user can see
+    this.memberSince = memberSince // member since When
+    this.userRole = userRole // admin, user
+  }
 }
 
-const offer1 = {
-  name: 'offer 1',
-  category: 'health',
-  discount: 10,
-  typeofDiscount: 'percent',
-  startOffer: '01.01.2020',
-  endOffer: '01.01.2024',
+class company {
+  constructor(name, users, offers, customerSince) {
+    this.name = name
+    this.users = users
+    this.offers = offers
+    this.customerSince = customerSince
+  }
+  addUser(user) {
+    this.users.push(user)
+    user.company = this
+  }
+  removeUser(user) {
+    this.users = this.users.filter(u => u !== user)
+    user.company = null
+  }
 }
 
-const company = {
-  name: 'company',
-  users: [user],
-  offers: [offer1],
-  customerSince: '01.01.2020',
+class offer {
+  constructor(name, category, discount, typeofDiscount, startOffer, endOffer) {
+    this.name = name
+    this.category = category // health, fitness, wellness, beauty, etc
+    this.discount = discount // 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+    this.typeofDiscount = typeofDiscount // percent, fixed
+    this.startOffer = startOffer // when the offer starts
+    this.endOffer = endOffer // when the offer ends
+  }
 }
+
+const user1 = new user('John Doe', 'test@asd.de', [], [], '01.01.2020', 'admin')
+const company1 = new company('Pizza Social Club', [], [], '07.05.2020')
+const offer1 = new offer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
+
+console.log(user1)
+console.log(company1)
+console.log(offer1)
