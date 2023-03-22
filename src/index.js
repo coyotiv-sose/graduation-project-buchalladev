@@ -19,14 +19,6 @@ const users = []
 const companies = []
 const offers = []
 
-const company1 = new Company('Pizza Social Club', [], [], '07.05.2020')
-const company2 = new Company('Spaccaforno', [], [], '07.03.2021')
-const offer1 = new Offer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
-
-// company1.addUser(user1)
-// company1.addUser(user2)
-// company1.addUser(user3)
-
 function createUser(name, email, company, offers, memberSince, userRole, gender) {
   const u = new User(name, email, company, offers, memberSince, userRole, gender)
   users.push(u)
@@ -51,20 +43,41 @@ function createOffer(name, category, discount, typeofDiscount, startOffer, endOf
 
 createCompany('Pizza Social Club', [], [], '07.05.2020')
 createCompany('Spaccaforno', [], [], '07.03.2021')
-createUser('John Doe', 'test@asd.de', companies[0], [], '01.01.2020', 'admin', 'male')
-createUser('Max Mustermann', 'test2@asd.de', companies[1], [], '22.04.2021', 'user', 'male')
+createUser('John Doe', 'test@asd.de', null, [], '01.01.2020', 'admin', 'male')
+createUser('Max Mustermann', 'test2@asd.de', null, [], '22.04.2021', 'user', 'male')
 createUser('Lisa Lustig', 'test3@asd.de', null, [], '12.04.2019', 'user', 'female')
 createOffer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
 
-console.log(users)
+console.log(companies[0])
+companies[0].addUser(users[0])
+companies[0].addUser(users[1])
+console.log(companies[0])
+companies[0].addOffer(offers[0])
+console.log(companies[0])
 
 //tests
 
 console.log('These are Tests:')
-console.log('_____')
-
+console.log('____________')
 console.log(`Test1: ${users[1].id === 1} // Check if IDs are right`)
-// console.log(`Test2: ${company1.users.length === 3} // Check if Company has 3 Users`)
-// console.log(`Test3: ${offer1.length === 1} // Check if an Offer was created `)
-
+console.log(`Test2: ${companies[1].users.length === 1} // Check if Company 2 has 1 User`)
+console.log(`Test3: ${offers.length === 1} // Check if an Offer was created `)
+console.log('____________')
 // console.log(users)
+
+console.log('#Users')
+users.forEach(element => console.log(`* ${element.name}`))
+console.log('')
+console.log('#Companies')
+companies.forEach(element => console.log(`* ${element.name}`))
+console.log('')
+console.log('#Offers')
+offers.forEach(element => console.log(`* ${element.name}`))
+console.log('______________________')
+console.log('')
+console.log(`#Offers linked to ${companies[0].name}`)
+console.log(companies[0].offers.forEach(element => console.log(`* ${element.name}`)))
+console.log('______')
+console.log('')
+console.log(`#Users linked to ${companies[0].name}`)
+console.log(companies[0].users.forEach(element => console.log(`* ${element.name}`)))

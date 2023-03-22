@@ -19,9 +19,7 @@ class Company {
   addOffer(offer) {
     offer.company = this
     this.offers.push(offer)
-    offers.push(offer)
   }
 }
-
 
 module.exports = Company
