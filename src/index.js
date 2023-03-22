@@ -81,3 +81,43 @@ console.log('______')
 console.log('')
 console.log(`#Users linked to ${companies[0].name}`)
 console.log(companies[0].users.forEach(element => console.log(`* ${element.name}`)))
+
+console.log('______________________')
+console.log('______________________')
+console.log('')
+
+console.log(
+  'Welcome to Healthhub! We are a company that is used for communicating with customers and offers them discounts for their health insurance and other health related services.'
+)
+console.log('---------')
+
+const readline = require('readline')
+const { Console } = require('console')
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
+let answers = {}
+
+rl.question('What is your name? ', name => {
+  answers.name = name
+
+  rl.question('What is your company? ', company => {
+    answers.company = company
+    console.log(``)
+    console.log(
+      `Hello ${answers.name}, your company ${answers.company} has the following offer:
+        ${findOffer(answers.company)}`
+    )
+
+    rl.close()
+  })
+})
+
+//find pizza social club in companies and return offer
+function findOffer(company) {
+  let foundOffer = companies.find(c => c.name === company)
+  return foundOffer.offers.map(o => `* ${o.name}`)
+}
