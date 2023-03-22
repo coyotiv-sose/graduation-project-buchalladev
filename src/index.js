@@ -11,82 +11,60 @@
 
 // i need to create an admin who can modify users and offers
 // offers need to display which discounts they have
-
-let userId = 0
-let companyId = 0
-let offerId = 0
+const User = require('./user.js')
+const Company = require('./company.js')
+const Offer = require('./offer.js')
 
 const users = []
 const companies = []
 const offers = []
-class user {
-  constructor(name, email, company, offers, memberSince, userRole, gender) {
-    this.id = userId++
-    this.name = name
-    this.email = email
-    this.gender = gender
-    this.company = company // company that the user is from
-    this.offers = offers // offers that the user can see
-    this.memberSince = memberSince // member since When
-    this.userRole = userRole // admin, user
+
+const company1 = new Company('Pizza Social Club', [], [], '07.05.2020')
+const company2 = new Company('Spaccaforno', [], [], '07.03.2021')
+const offer1 = new Offer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
+
+// company1.addUser(user1)
+// company1.addUser(user2)
+// company1.addUser(user3)
+
+function createUser(name, email, company, offers, memberSince, userRole, gender) {
+  const u = new User(name, email, company, offers, memberSince, userRole, gender)
+  users.push(u)
+
+  if (company) {
+    company.addUser(u)
   }
+  return u
 }
 
-class company {
-  constructor(name, users, offers, customerSince) {
-    this.id = companyId++
-    this.name = name
-    this.users = users
-    this.offers = offers
-    this.customerSince = customerSince
-  }
-  addUser(user) {
-    user.company = this
-    this.users.push(user)
-  }
-  removeUser(user) {
-    this.users = this.users.filter(u => u !== user)
-    user.company = null
-  }
+function createCompany(name, users, offers, memberSince) {
+  const c = new Company(name, users, offers, memberSince)
+  companies.push(c)
+  return c
 }
 
-class offer {
-  constructor(name, category, discount, typeofDiscount, startOffer, endOffer) {
-    this.id = offerId++
-    this.name = name
-    this.category = category // health, fitness, wellness, beauty, etc
-    this.discount = discount // 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
-    this.typeofDiscount = typeofDiscount // percent, fixed
-    this.startOffer = startOffer // when the offer starts
-    this.endOffer = endOffer // when the offer ends
-  }
+function createOffer(name, category, discount, typeofDiscount, startOffer, endOffer) {
+  const o = new Offer(name, category, discount, typeofDiscount, startOffer, endOffer)
+  offers.push(o)
+  return o
 }
-const user1 = new user('John Doe', 'test@asd.de', [], [], '01.01.2020', 'admin', 'male')
-const user2 = new user('Max Mustermann', 'test2@asd.de', [], [], '22.04.2021', 'user', 'male')
-const user3 = new user('Lisa Lustig', 'test3@asd.de', [], [], '12.04.2019', 'user', 'female')
-const company1 = new company('Pizza Social Club', [], [], '07.05.2020')
-const offer1 = new offer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
 
-console.log(company1)
-console.log(offer1)
-console.log(user1)
-company1.addUser(user1)
-console.log(company1)
-console.log(user1)
-console.log(user2)
-company1.addUser(user2)
-company1.addUser(user3)
-console.log(company1)
+createCompany('Pizza Social Club', [], [], '07.05.2020')
+createCompany('Spaccaforno', [], [], '07.03.2021')
+createUser('John Doe', 'test@asd.de', companies[0], [], '01.01.2020', 'admin', 'male')
+createUser('Max Mustermann', 'test2@asd.de', companies[1], [], '22.04.2021', 'user', 'male')
+createUser('Lisa Lustig', 'test3@asd.de', null, [], '12.04.2019', 'user', 'female')
+createOffer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
 
-console.log(offer1)
+console.log(users)
+
 //tests
 
 console.log('These are Tests:')
 console.log('_____')
 
-console.log(`Test1: ${user2.id === 1} // Check if IDs are right`)
-console.log(`Test2: ${company1.users.length === 3} // Check if Company has 3 Users`)
-console.log(`Test3: ${offer1.length === 1} // Check if an Offer was created `)
+console.log(`Test1: ${users[1].id === 1} // Check if IDs are right`)
+// console.log(`Test2: ${company1.users.length === 3} // Check if Company has 3 Users`)
+// console.log(`Test3: ${offer1.length === 1} // Check if an Offer was created `)
 
-//TODO
-// create Arrays that contain all users, companies and offers
+// console.log(users)
