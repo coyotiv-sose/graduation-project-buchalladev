@@ -12,8 +12,12 @@
 // i need to create an admin who can modify users and offers
 // offers need to display which discounts they have
 
+let userId = 0
+let companyId = 0
+let offerId = 0
 class user {
   constructor(name, email, company, offers, memberSince, userRole) {
+    this.id = userId++
     this.name = name
     this.email = email
     this.company = company // company that the user is from
@@ -25,14 +29,15 @@ class user {
 
 class company {
   constructor(name, users, offers, customerSince) {
+    this.id = companyId++
     this.name = name
     this.users = users
     this.offers = offers
     this.customerSince = customerSince
   }
   addUser(user) {
-    this.users.push(user)
     user.company = this
+    this.users.push(user)
   }
   removeUser(user) {
     this.users = this.users.filter(u => u !== user)
@@ -42,6 +47,7 @@ class company {
 
 class offer {
   constructor(name, category, discount, typeofDiscount, startOffer, endOffer) {
+    this.id = offerId++
     this.name = name
     this.category = category // health, fitness, wellness, beauty, etc
     this.discount = discount // 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
@@ -50,11 +56,13 @@ class offer {
     this.endOffer = endOffer // when the offer ends
   }
 }
-
 const user1 = new user('John Doe', 'test@asd.de', [], [], '01.01.2020', 'admin')
 const company1 = new company('Pizza Social Club', [], [], '07.05.2020')
 const offer1 = new offer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
 
-console.log(user1)
 console.log(company1)
 console.log(offer1)
+console.log(user1)
+company1.addUser(user1)
+console.log(company1)
+console.log(user1)
