@@ -46,7 +46,7 @@ createCompany('Spaccaforno', [], [], '07.03.2021')
 createUser('John Doe', 'test@asd.de', null, [], '01.01.2020', 'admin', 'male')
 createUser('Max Mustermann', 'test2@asd.de', null, [], '22.04.2021', 'user', 'male')
 createUser('Lisa Lustig', 'test3@asd.de', null, [], '12.04.2019', 'user', 'female')
-createOffer('Urban Sports Club', ['fitness', 'wellbeing'], 10, 'percent', '01.01.2020', '01.01.2024')
+createOffer('Urban Sports Club', ['fitness', 'wellbeing'], 10, '%', '01.01.2020', '01.01.2024')
 
 console.log(companies[0])
 companies[0].addUser(users[0])
@@ -119,5 +119,5 @@ rl.question('What is your name? ', name => {
 //find pizza social club in companies and return offer
 function findOffer(company) {
   let foundOffer = companies.find(c => c.name === company)
-  return foundOffer.offers.map(o => `* ${o.name}`)
+  return foundOffer.offers.map(o => `* ${o.discount} ${o.typeofDiscount} at ${o.name} until ${o.endOffer}`)
 }
