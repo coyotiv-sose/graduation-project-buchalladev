@@ -102,21 +102,22 @@ const rl = readline.createInterface({
 })
 
 let answers = {}
+setTimeout(() => {
+  rl.question('What is your name? ', name => {
+    answers.name = name
 
-rl.question('What is your name? ', name => {
-  answers.name = name
-
-  rl.question('What is your company? ', company => {
-    answers.company = company
-    console.log(``)
-    console.log(
-      `Hello ${answers.name}, your company ${capitalize.words(answers.company)} has the following offer:
+    rl.question('What is your company? ', company => {
+      answers.company = company
+      console.log(``)
+      console.log(
+        `Hello ${answers.name}, your company ${capitalize.words(answers.company)} has the following offer:
         ${findOffer(answers.company)}`
-    )
+      )
 
-    rl.close()
+      rl.close()
+    })
   })
-})
+}, 1000)
 
 //find company in companies and return offer
 function findOffer(company) {
