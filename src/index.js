@@ -18,6 +18,8 @@ const users = []
 const companies = []
 const offers = []
 
+var capitalize = require('capitalize')
+
 function createUser(name, email, company, offers, memberSince, userRole, gender) {
   const u = new User(name, email, company, offers, memberSince, userRole, gender)
   users.push(u)
@@ -40,7 +42,7 @@ function createOffer(name, category, discount, typeofDiscount, startOffer, endOf
   return o
 }
 
-createCompany('Faktormensch GmbH', [], [], '07.05.2020')
+createCompany('Faktor mensch', [], [], '07.05.2020')
 createCompany('Spaccaforno', [], [], '07.03.2021')
 createUser('John Doe', 'test@asd.de', null, [], '01.01.2020', 'admin', 'male')
 createUser('Max Mustermann', 'test2@asd.de', null, [], '22.04.2021', 'user', 'male')
@@ -93,7 +95,6 @@ console.log(
 
 console.log('---------')
 const readline = require('readline')
-const { Console } = require('console')
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -109,7 +110,7 @@ rl.question('What is your name? ', name => {
     answers.company = company
     console.log(``)
     console.log(
-      `Hello ${answers.name}, your company ${answers.company} has the following offer:
+      `Hello ${answers.name}, your company ${capitalize.words(answers.company)} has the following offer:
         ${findOffer(answers.company)}`
     )
 
@@ -119,6 +120,6 @@ rl.question('What is your name? ', name => {
 
 //find company in companies and return offer
 function findOffer(company) {
-  let foundOffer = companies.find(c => c.name === company)
+  let foundOffer = companies.find(c => c.name == company)
   return foundOffer.offers.map(o => `* ${o.discount} ${o.typeofDiscount} at ${o.name} until ${o.endOffer}`)
 }
