@@ -10,13 +10,3 @@ block content
   ul
     each attendee in ride.attendees
       li= attendee.name
-
-  p They will bring the following items:
-  ul
-    each item in ride.items
-      li
-        input(type="checkbox", checked=item.isEnough)
-        | #{item.name} (#{item.quantity}/#{item.desiredQuantity})
-        ul
-          each whoIsBringingWhat in item.whoIsBringingWhat
-            li #{whoIsBringingWhat.user.name} is bringing #{pluralize(item.name, whoIsBringingWhat.quantity, true)}.
