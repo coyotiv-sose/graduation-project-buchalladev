@@ -1,0 +1,33 @@
+@startuml UseCase HealthHub
+
+left to right direction
+
+actor User
+actor Admin
+
+
+package "Profile" {
+usecase login
+usecase logout
+usecase register
+}
+
+package "Edit Database" {
+useCase createOffer
+useCase editOffer
+useCase deleteOffer
+useCase assignOffer
+}
+
+User --> login
+User --> logout
+User --> register
+Admin --> login
+Admin --> logout
+Admin --> createOffer
+Admin --> editOffer
+Admin --> deleteOffer
+Admin --> assignOffer
+
+
+@enduml

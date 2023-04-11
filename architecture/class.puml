@@ -1,6 +1,55 @@
-@startuml Person 
-class Person {
-  name: string
-  age: number
+@startuml HealthHub Class Diagram
+class user {
+  user: string
+  email: string
+  gender: string
+  company: company
+  offers: [offer]
+  memberSince: Date
+  userRole: string
+
+  constructor(name: string, email: string, gender: string, company: company, offers: [offer], memberSince: Date, userRole: string)
 }
+
+class company {
+  name: string
+  users: [user]
+  offers: [offer]
+  customerSince: Date
+
+  constructor(name: string, users: [user], offers: [offer], customerSince: Date)
+
+  addUser(user)
+  removeUser(user)
+  addOffer(offer)
+  removeOffer(offer)
+  findOffer(company)
+  }
+
+
+class offer {
+  name: string
+  category: string
+  discount: number
+  typeofDiscount: string
+  startOffer: Date
+  endOffer: Date
+  description: string
+
+constructor(name:string, category:string, discount:number, typeofDiscount:string, startOffer:Date, endOffer:Date, description:string)
+addCompany(company)
+removeCompany(company)
+
+}
+
+
+user <.. company
+
+offer ---> company
+user --> company
+user --> offer
+company --> offer
+company --> user
+offer --> user
+
 @enduml

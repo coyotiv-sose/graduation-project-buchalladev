@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h2 rides
+  p Welcome to the ride page!
+  p Here you can see all the rides that have been created by users.
+
+  ul
+    each ride in rides
+      li
+        a(href="/rides/" + ride._id)= ride.name
+        p
+        | at #{ride.location}
+        | on #{ride.date}
+        p #{ride.attendees.length} people are attending
