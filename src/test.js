@@ -6,9 +6,6 @@ axios.defaults.baseURL = 'http://localhost:3000'
 console.log('Gruppetto is an App to Arrange Grouprides!')
 
 async function main() {
-  await User.deleteMany()
-  await ride.deleteMany()
-
   const andreas = await axios.post('/users', {
     name: 'Andreas',
     ftp: 3.3,
@@ -21,26 +18,24 @@ async function main() {
 
   const andreasRide = await axios.post('/rides', {
     user: andreas.data._id,
+    name: "Andreas' Ride",
+    location: 'Tempelhofer Feld',
+    date: '2023-05-01',
     pace: 3.5,
-    name: 'GroupRide of Andreas',
-    location: 'Ohlsdorfer Friedhof',
-    date: '2023-06-03',
+    rideLength: 45.7,
   })
 
   const johannasRide = await axios.post('/rides', {
     user: johanna.data._id,
-    pace: 3.5,
-    name: 'GroupRide of Johanna',
+    name: 'Johannas Ride',
     location: 'Sperrwerk Entenwerder',
-    date: '2023-05-16',
+    date: '2023-06-21',
+    pace: 2.1,
+    rideLength: 61.2,
   })
 
   await axios.post(`/rides/${andreasRide.data._id}/attendees`, {
     user: johanna.data._id,
-  })
-
-  await axios.post(`/rides/${johannasRide.data._id}/attendees`, {
-    user: andreas.data._id,
   })
 
   const allUsers = await axios.get('/users')
