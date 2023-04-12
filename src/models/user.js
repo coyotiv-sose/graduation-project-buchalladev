@@ -20,15 +20,15 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(autopopulate)
 
 class User {
-  async createride(name, location, date) {
+  async createRide(name, location, date) {
     const ride = await ride.create({ name, location, date })
 
-    await this.joinride(ride)
+    await this.joinRide(ride)
 
     return ride
   }
 
-  async joinride(ride) {
+  async joinRide(ride) {
     ride.attendees.push(this)
     this.rides.push(ride)
 
@@ -36,7 +36,7 @@ class User {
     await this.save()
   }
 
-  leaveride(ride) {
+  leaveRide(ride) {
     ride.attendees = ride.attendees.filter(attendee => attendee !== this)
     this.rides = this.rides.filter(p => p !== ride)
   }
@@ -49,7 +49,7 @@ ${this.rides.length} rides:
 ${this.rides
   .map(
     ride => `
-- ${ride.name} at ${ride.location} on ${ride.date}
+- ${ride.name} meeting at ${ride.location} on ${ride.date}
 `
   )
   .join('')}

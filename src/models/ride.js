@@ -1,4 +1,3 @@
-const pluralize = require('pluralize')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
 
@@ -7,6 +6,7 @@ const rideSchema = new mongoose.Schema({
   location: String,
   pace: Number,
   date: String,
+  rideLength: Number,
   attendees: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -24,7 +24,7 @@ class ride {
   get details() {
     return `
 # ride ${this.name}
-## at ${this.location} on ${this.date}
+## meeting at ${this.location} on ${this.date} to ride at ${this.pace} w/kg for ${this.rideLength}km
 
 ${this.attendees.length} people are attending:
 ${this.attendees.map(attendee => attendee.name).join(', ')}

@@ -1,9 +1,10 @@
 extends layout
 
 block content
-  h2 ride #{ride.name}
+  h2 ride #{ride.name} on #{ride.date}
+  h3 #{ride.pace} w/kg for #{ride.distance}km
+  h4 Meeting at #{ride.location}
 
-  h3 at #{ride.location} on #{ride.date}
 
   p #{ride.attendees.length} people are attending:
 
