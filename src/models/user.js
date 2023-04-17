@@ -1,4 +1,4 @@
-const ride = require('./ride')
+const Ride = require('./ride')
 
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
@@ -21,7 +21,7 @@ userSchema.plugin(autopopulate)
 
 class User {
   async createRide(name, location, date) {
-    const ride = await ride.create({ name, location, date })
+    const ride = await Ride.create({ name, location, date })
 
     await this.joinRide(ride)
 

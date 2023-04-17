@@ -34,9 +34,9 @@ async function main() {
     rideLength: 61.2,
   })
 
-  await axios.post(`/rides/${andreasRide.data._id}/attendees`, {
-    user: johanna.data._id,
-  })
+  // await axios.post(`/rides/${andreasRide.data._id}/attendees`, {
+  //   user: johanna.data._id,
+  // })
 
   const allUsers = await axios.get('/users')
   console.log('List of all users', allUsers.data)
