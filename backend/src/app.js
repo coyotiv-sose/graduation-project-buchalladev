@@ -4,6 +4,7 @@ const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const pluralize = require('pluralize')
+const cors = require('cors')
 
 require('dotenv').config()
 require('./database-connection')
@@ -13,6 +14,8 @@ const usersRouter = require('./routes/users')
 const ridesRouter = require('./routes/rides')
 
 const app = express()
+
+app.use(cors())
 
 app.locals.pluralize = pluralize
 
