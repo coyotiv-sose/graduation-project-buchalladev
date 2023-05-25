@@ -2,14 +2,14 @@ services:
   api:
     image: groupride-api
     build:
-      context: .
+      context: backend
       dockerfile: dockerfile
     depends_on:
       - mongodb
     ports:
       - '3000:3000'
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
     environment:
       - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/groupride
 
