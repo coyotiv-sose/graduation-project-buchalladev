@@ -18,7 +18,7 @@ router.get('/', async function (req, res, next) {
 router.get('/:id', async function (req, res, next) {
   const ride = await Ride.findById(req.params.id)
 
-  if (!ride) return res.status(404).send('Pide not found')
+  if (!ride) return res.status(404).send('Ride not found')
 
   if (req.query.view === 'json') return res.send(ride)
 

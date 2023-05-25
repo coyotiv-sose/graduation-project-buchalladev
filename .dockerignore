@@ -1,0 +1,5 @@
+node modules
+.eslintrc.ison
+.prettierignore
+.prettierrc
+Dockerfile
