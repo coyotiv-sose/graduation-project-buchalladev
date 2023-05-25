@@ -1,23 +1,24 @@
 const Ride = require('./ride')
-
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
-  name: String,
-  ftp: Number,
+  name: {
+    type: String,
+    required: true,
+  },
   rides: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'ride',
-      autopopulate: {
-        maxDepth: 1,
-      },
+      ref: 'Ride',
+      autopopulate: false,
     },
   ],
 })
 
 userSchema.plugin(autopopulate)
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 
 class User {
   async createRide(name, location, date) {
@@ -36,24 +37,12 @@ class User {
     await this.save()
   }
 
-  leaveRide(ride) {
-    ride.attendees = ride.attendees.filter(attendee => attendee !== this)
-    this.rides = this.rides.filter(p => p !== ride)
-  }
+  async leaveRide(ride) {
+    ride.attendees.pull(this)
+    this.rides.pull(ride)
 
-  get profile() {
-    return `
-# ${this.name}
-
-${this.rides.length} rides:
-${this.rides
-  .map(
-    ride => `
-- ${ride.name} meeting at ${ride.location} on ${ride.date}
-`
-  )
-  .join('')}
-    `
+    await ride.save()
+    await this.save()
   }
 }
 
