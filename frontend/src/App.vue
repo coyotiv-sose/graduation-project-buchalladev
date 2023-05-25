@@ -1,23 +1,48 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { useAccountStore } from './stores/account'
+
+import { mapActions, mapState } from 'pinia'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+  async mounted() {
+    await this.fetchUser()
+    await this.init()
+  },
+  methods: {
+    ...mapActions(useAccountStore, ['fetchUser', 'logout']),
+    ...mapActions(useSocketStore, ['init'])
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user']),
+    ...mapState(useSocketStore, ['connected'])
+  }
+}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/rides">Rides</RouterLink>
         <RouterLink to="/about">About</RouterLink>
+        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
+        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+        <a v-if="user" @click="logout">Log out</a>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style scoped>
