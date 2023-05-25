@@ -4,12 +4,22 @@ var router = express.Router()
 
 /* GET users listing. */
 router.get('/', async function (req, res, next) {
-  res.send(await User.find())
+  res.send(await User.find().populate('rides'))
+})
+
+router.get('/:id', async function (req, res, next) {
+  const user = await User.findById(req.params.id).populate('rides')
+
+  if (!user) return next({ status: 404, message: 'User not found' })
+
+  res.send(user)
 })
 
 /* Create a new user. */
 router.post('/', async function (req, res, next) {
-  const user = await User.create({ name: req.body.name })
+  const { name, email, password } = req.body
+
+  const user = await User.register({ name, email }, password)
 
   res.send(user)
 })

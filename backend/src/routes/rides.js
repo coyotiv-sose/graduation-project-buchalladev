@@ -7,31 +7,29 @@ var router = express.Router()
 router.get('/', async function (req, res, next) {
   const rides = await Ride.find()
 
-  if (req.query.view === 'json') return res.send(rides)
-
-  res.render('rides', {
-    rides,
-  })
+  res.send(rides)
 })
 
 /* GET ride details. */
 router.get('/:id', async function (req, res, next) {
   const ride = await Ride.findById(req.params.id)
 
-  if (!ride) return res.status(404).send('Ride not found')
+  if (!ride) return next({ status: 404, message: 'Ride not found' })
 
-  if (req.query.view === 'json') return res.send(ride)
-
-  res.render('ride-detail', {
-    ride,
-  })
+  res.send(ride)
 })
 
 // create a ride for a user
 router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.user)
 
-  const ride = await user.createRide(req.body.name, req.body.location, req.body.date)
+  const description = await generateDescription({
+    name: req.body.name,
+    location: req.body.location,
+    date: req.body.date,
+  })
+
+  const ride = await user.createRide(req.body.name, req.body.location, req.body.date, description)
 
   res.send(ride)
 })
@@ -40,19 +38,22 @@ router.post('/', async function (req, res, next) {
 router.post('/:rideId/attendees', async function (req, res, next) {
   const user = await User.findById(req.body.user)
 
-  console.log('user', req.body.user, req.params.rideId)
   const ride = await Ride.findById(req.params.rideId)
 
-  await user.joinRide(Ride)
+  await user.joinRide(ride)
 
-  res.send({
-    name: ride.name,
-    location: ride.location,
-    date: ride.date,
-    attendees: ride.attendees.map(attendee => attendee.name),
-    pace: ride.pace,
-    rideLength: ride.rideLength,
-  })
+  res.send(ride)
 })
 
+// leave a ride
+router.delete('/:rideId/attendees', async function (req, res, next) {
+  const user = await User.findById(req.body.user)
+  const ride = await Ride.findById(req.params.rideId)
+
+  await user.leaveRide(ride)
+
+  const updatedRide = await Ride.findById(req.params.rideId)
+
+  res.send(updatedRide)
+})
 module.exports = router
