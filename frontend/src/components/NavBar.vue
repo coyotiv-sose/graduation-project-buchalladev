@@ -18,7 +18,6 @@ export default {
     <div class="innernav">
       <div class="logo link"><a href="/">GRUPPETTO</a></div>
       <div class="link"><a href="/rides">Rides</a></div>
-      <div class="link"><a href="/users">Users</a></div>
       <div class="link" v-if="!user"><a href="/login">Log in</a></div>
       <div class="link" v-if="!user"><a href="/signup">Sign up</a></div>
       <div class="link" v-if="user"><a href="/myrides">My Rides</a></div>

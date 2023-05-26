@@ -2,7 +2,7 @@
 
 #app {
   width: 100%;
-
+  line-height: 2rem;
 }
 
 a,
@@ -22,6 +22,4 @@ a,
   body {
     display: flex;
   }
-
-
 }

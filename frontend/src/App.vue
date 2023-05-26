@@ -26,9 +26,19 @@ export default {
 
 <template>
   <div>
-  <NavBar :user="user" />
-  <Suspense>
-    <RouterView />
-  </Suspense>
+    <NavBar :user="user" />
+    <div class="mainview">
+      <Suspense><RouterView /></Suspense>
+    </div>
   </div>
 </template>
+
+<style>
+.mainview {
+  max-width: 1024;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2rem;
+}
+
+</style>

@@ -4,8 +4,7 @@ import TheWelcome from '../components/TheWelcome.vue'
 
 <template>
   <main>
-    <Suspense>
-      <TheWelcome />
-    </Suspense>
+    <h1>Welcome to Grupetto!</h1>
+    <p>This is an app to help you find people and rides to ride along.</p>
   </main>
 </template>
