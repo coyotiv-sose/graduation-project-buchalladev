@@ -1,7 +1,7 @@
 <script>
 import axios from 'axios'
 import { mapActions } from 'pinia'
-import { useUserStore } from '../stores/user'
+import { useAccountStore } from '../stores/account'
 
 export default {
   name: 'LoginView',
@@ -12,7 +12,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useUserStore, ['login']),
+    ...mapActions(useAccountStore, ['login']),
     async doLogin() {
       await this.login(this.email, this.password)
       this.$router.push('/')

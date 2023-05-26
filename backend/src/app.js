@@ -10,6 +10,8 @@ const passport = require('passport')
 const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
 
+const apiTest = require('./example-api-calls')
+
 const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index')
@@ -134,5 +136,7 @@ app.createSocketServer = function (server) {
     })
   })
 }
+
+
 
 module.exports = app
