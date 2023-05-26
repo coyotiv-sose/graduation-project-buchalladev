@@ -15,7 +15,11 @@ const router = createRouter({
       component: () => import('../views/RidesView.vue')
     },
 
-
+    {
+      path: '/rides/new',
+      name: 'new-ride',
+      component: () => import('../views/CreateRideView.vue')
+    },
     {
       path: '/rides/:id',
       name: 'ride',
