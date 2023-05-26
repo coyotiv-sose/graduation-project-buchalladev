@@ -10,6 +10,8 @@ Gruppetto is an app designed to assist users in managing group rides. Whether yo
 
 - **Ride Joining**: Gruppetto allows users to browse through the available group rides and join the ones that suit their interests and availability. By facilitating ride joining, the app encourages social interaction and enables users to expand their network of like-minded individuals.
 
+---
+
 # Coyotiv School of Software Engineering
 
 ## Node & PlantUML Starter Template
