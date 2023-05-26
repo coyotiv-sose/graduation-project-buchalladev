@@ -1,7 +1,7 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
+import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
-
 import { mapActions, mapState } from 'pinia'
 
 export default {
@@ -13,36 +13,35 @@ export default {
   },
   async mounted() {
     await this.fetchUser()
-    await this.init()
   },
   methods: {
-    ...mapActions(useAccountStore, ['fetchUser', 'logout']),
-    ...mapActions(useSocketStore, ['init'])
+    ...mapActions(useAccountStore, ['fetchUser', 'logout'])
   },
   computed: {
-    ...mapState(useAccountStore, ['user']),
-    ...mapState(useSocketStore, ['connected'])
+    ...mapState(useAccountStore, ['user'])
   }
 }
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/rides">Rides</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
-        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
-        <a v-if="user" @click="logout">Log out</a>
-      </nav>
-    </div>
-  </header>
+  <div>
+    <header>
+      <div class="wrapper">
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/rides">Rides</RouterLink>
+          <RouterLink v-if="!user" to="/login">Log in</RouterLink>
+          <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+          <a v-if="user" @click="logout">Log out</a>
+        </nav>
+      </div>
+    </header>
+    <h1>Gruppetto {{ user?.name }}.</h1>
 
-  <Suspense>
-    <RouterView />
-  </Suspense>
+    <Suspense>
+      <RouterView />
+    </Suspense>
+  </div>
 </template>
 
 <style scoped>

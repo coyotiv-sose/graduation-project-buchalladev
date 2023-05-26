@@ -12,5 +12,5 @@ ul
   li(v-for="ride in rides" :key="ride._id")
     RouterLink(:to="`/rides/${ride._id}`")
       | {{ ride.name }} at {{ ride.location }} on {{ ride.date }}
-    p {{ ride.attendees.length }} people are attending
+
 </template>

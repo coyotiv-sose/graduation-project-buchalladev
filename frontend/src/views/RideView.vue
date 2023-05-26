@@ -8,7 +8,6 @@ import { onUnmounted } from 'vue'
 export default {
   name: 'RideDetail',
   components: {
-    CounterOptionsApi,
     User
   },
   async created() {
