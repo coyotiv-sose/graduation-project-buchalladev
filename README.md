@@ -1,4 +1,17 @@
+# Gruppetto
+
+Gruppetto is an app designed to assist users in managing group rides. Whether you enjoy cycling, motorcycling, or any other group activity, Gruppetto provides a seamless platform for organizing and participating in group rides. With features like user authentication, ride creation, and ride joining, Gruppetto makes it easy to connect with fellow enthusiasts and enjoy your favorite activities together.
+
+## Features
+
+- **User Authentication**: Gruppetto allows users to create accounts and securely login using their credentials. This feature ensures that only authorized users can access and participate in group rides.
+
+- **Ride Creation**: Users can create new rides by providing essential details such as the ride date, time, location, and any specific requirements or preferences. This functionality enables ride organizers to plan and schedule events efficiently.
+
+- **Ride Joining**: Gruppetto allows users to browse through the available group rides and join the ones that suit their interests and availability. By facilitating ride joining, the app encourages social interaction and enables users to expand their network of like-minded individuals.
+
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-f4981d0f882b2a3f0472912d15f9806d57e124e0fc890972558857b51b24a6f9.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10553680)
+
 # Coyotiv School of Software Engineering
 
 ## Node & PlantUML Starter Template
