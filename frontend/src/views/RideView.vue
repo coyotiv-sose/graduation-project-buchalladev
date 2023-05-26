@@ -1,7 +1,7 @@
 <script>
 import User from '../components/User.vue'
 import { mapState, mapActions } from 'pinia'
-import { useAccountStore } from '../stores/account'
+import { useAccountStore } from '../stores/user'
 import { useRideStore } from '../stores/ride'
 import { onUnmounted } from 'vue'
 
