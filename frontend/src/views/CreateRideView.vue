@@ -14,7 +14,7 @@ export default {
   methods: {
     ...mapActions(useRideStore, ['createRide']),
     async doCreateRide() {
-      await this.createRide(this.date, this.distance)
+      await this.createRide(this.name, this.location, this.date, this.time, this.distance)
       this.$router.push('/rides')
     }
   }
@@ -27,6 +27,15 @@ export default {
     <form @submit.prevent="doCreateRide">
       <label for="date">Date:</label>
       <input id="date" v-model="date" type="date" required />
+
+      <label for="name">Name:</label>
+      <input id="name" v-model="name" type="text" required />
+
+      <label for="time">Time:</label>
+      <input id="time" v-model="time" type="text" required />
+
+      <label for="location">Location:</label>
+      <input id="location" v-model="location" type="text" required />
 
       <label for="distance">Distance:</label>
       <input id="distance" v-model="distance" type="number" required />
