@@ -23,7 +23,7 @@ router.get('/:id', async function (req, res, next) {
 router.post('/', async function (req, res, next) {
   const user = await User.findById(req.body.user)
 
-  const ride = await user.createRide(req.body.name, req.body.location, req.body.date)
+  const ride = await user.createRide(req.body.name, req.body.location, req.body.date, req.body.time, req.body.distance)
 
   res.send(ride)
 })

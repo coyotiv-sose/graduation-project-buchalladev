@@ -9,12 +9,14 @@ export const useRideStore = defineStore('Ride', {
     async fetchRide(id) {
       this.ride = (await axios.get('/rides/' + id)).data
     },
-    async createRide(name, location, date) {
+    async createRide(name, location, date, time, distance) {
       return (
         await axios.post('/rides', {
           name: name,
           location: location,
-          date: date
+          date: date,
+          time: time,
+          distance: distance
         })
       ).data
     }

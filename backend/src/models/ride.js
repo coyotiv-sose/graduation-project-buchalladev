@@ -5,6 +5,8 @@ const rideSchema = new mongoose.Schema({
   name: String,
   location: String,
   date: String,
+  time: String,
+  distance: Number,
   attendees: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -21,8 +21,8 @@ userSchema.plugin(autopopulate)
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 
 class User {
-  async createRide(name, location, date) {
-    const ride = await Ride.create({ name, location, date })
+  async createRide(name, location, date, time, distance) {
+    const ride = await Ride.create({ name, location, date, time, distance })
 
     await this.joinRide(ride)
 

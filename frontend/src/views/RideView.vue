@@ -1,7 +1,7 @@
 <script>
 import User from '../components/User.vue'
 import { mapState, mapActions } from 'pinia'
-import { useAccountStore } from '../stores/user'
+import { useUserStore } from '../stores/user'
 import { useRideStore } from '../stores/ride'
 import { onUnmounted } from 'vue'
 
@@ -19,7 +19,7 @@ export default {
     this.leaveRide(this.ride._id)
   },
   computed: {
-    ...mapState(useAccountStore, ['user']),
+    ...mapState(useUserStore, ['user']),
     ...mapState(useRideStore, ['ride'])
   },
   methods: {
@@ -36,11 +36,11 @@ div(v-else)
   p(v-if="user && user._id == ride?.attendees?.[0]?._id")
     RouterLink(to="/rides/:id/edit") Edit ride
 
-  h3 at {{ride.location}} on {{ride.date}}
+  h3 at {{ride.location}} on {{ride.date}} at {{ride.time}}
 
   p This Ride is hosted by: {{ ride.attendees?.[0].name }}
 
-  p {{ ride.description }}
+
 
   p {{ride.attendees?.length}} people are attending:
 

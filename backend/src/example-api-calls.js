@@ -27,6 +27,8 @@ async function main() {
     name: "Andreas' Ride",
     location: 'Zollspieker Fährhaus',
     date: '2023-07-03',
+    time: '10:00',
+    distance: 50,
   })
 
   const johannasRide = await axios.post('/rides', {
@@ -34,14 +36,16 @@ async function main() {
     name: "Johanna's Ride",
     location: 'Sperrwerk Billwerder Bucht',
     date: '2023-07-05',
+    time: '13:00',
+    distance: 60,
   })
 
   await axios.post(`/rides/${andreasRide.data._id}/attendees`, {
-    user: numan.data._id,
+    user: johanna.data._id,
   })
 
   await axios.post(`/rides/${johannasRide.data._id}/attendees`, {
-    user: armagan.data._id,
+    user: andreas.data._id,
   })
 
   const allUsers = await axios.get('/users')
